@@ -1,7 +1,7 @@
 NAME = KVPstorage
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
-SRCS = main read_loop
+SRCS = main input_loop exec_command
 VPATH = ./srcs
 
 OBJECTS := $(SRCS:%=%.o)
