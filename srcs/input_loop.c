@@ -7,12 +7,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-void	input_loop(void)
+void	input_loop(t_kvp **settings, char *filepath)
 {
 	char	*line;
 	size_t	len;
 	ssize_t	ret;
 
+	(void)filepath;
+	(void)settings;
 	while (1)
 	{
 		printf("> ");

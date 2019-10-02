@@ -1,6 +1,5 @@
 /*
-fsync
-busybox
+
 */
 
 #include "KVPstorage.h"
@@ -31,6 +30,5 @@ void	exec_command(char *line)
 	else
 	{
 		printf(USAGE);
-	}
-	
+	}	
 }
