@@ -9,7 +9,7 @@ void	cmd_getall(t_kvp *settings)
 {
 	while (settings != NULL)
 	{
-		printf("Key: %*s\tValue: %*s\n", KEYSIZE, settings->key, VALUESIZE, settings->value);
+		printf("%s\t\t%s\n", settings->key, settings->value);
 		settings = settings->next;
 	}
 }

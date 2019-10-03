@@ -1,13 +1,17 @@
-/*
-*/
-
 #include "KVPstorage.h"
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
 
-void	input_loop(t_kvp **settings, FILE **file_info)
+/*
+Input loop keeps requesting input from stdin
+Each line is validated and executed in exec_command
+If line is empty the read loop continues with a new prompt
+The '\n' is removed from line before exec_command
+*/
+
+void	input_loop(t_kvp **settings, t_fileinfo *fileinfo)
 {
 	char	*line;
 	size_t	linecap;
@@ -19,7 +23,7 @@ void	input_loop(t_kvp **settings, FILE **file_info)
 		line = NULL;
 		linecap = 0;
 		ret = getline(&line, &linecap, stdin);
-		if (ret < 0) // add if no error happened continue
+		if (ret < 0)
 		{
 			perror("Error reading stdin");
 			exit (EXIT_FAILURE) ;
@@ -28,6 +32,6 @@ void	input_loop(t_kvp **settings, FILE **file_info)
 			continue ;
 		else
 			line[ret - 1] = '\0';
-		exec_command(settings, file_info, line);
+		exec_command(settings, fileinfo, line);
 	}
 }

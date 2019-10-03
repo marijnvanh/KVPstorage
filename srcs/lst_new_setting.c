@@ -8,7 +8,7 @@
 t_kvp	*lst_new_setting(char key[KEYSIZE + 1], char value[VALUESIZE + 1])
 {
 	t_kvp	*new_setting;
-	
+
 	new_setting = (t_kvp*)malloc(sizeof(t_kvp));
 	if (new_setting == NULL)
 	{

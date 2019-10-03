@@ -1,18 +1,10 @@
-/*
-
-- filepath gets set, either with a path given as argument or the default file .settings
-- in init_settings_list all existing settings are added to the settings list
-- if the file does not exist a new file is created
-- read loop is started
-
-fsync
-busybox
-
-*/
-
 #include "KVPstorage.h"
 #include <stdlib.h>
 #include <string.h>
+
+/*
+Filepath gets set, either with a path given as argument or the default file
+*/
 
 static char	*init_filepath(char *argv_1)
 {
@@ -25,17 +17,22 @@ static char	*init_filepath(char *argv_1)
 	return (filepath);
 }
 
+/*
+A file stream is opened with filepath
+Any existing settings are saved to the settings list
+Read loop is started
+*/
+
 int			main(int argc, char **argv)
 {
-	t_kvp	*settings;
-	char	*filepath;
-	FILE	*file_info;
+	t_kvp		*settings;
+	t_fileinfo	fileinfo;
 
 	(void)argc;
 	settings = NULL;
-	filepath = init_filepath(argv[1]);
-	file_info = open_settings_file(filepath);
-	settings = init_settings_list(file_info);
-	input_loop(&settings, &file_info);
+	fileinfo.filepath = init_filepath(argv[1]);
+	fileinfo.stream = open_settings_file(fileinfo.filepath);
+	settings = init_settings_list(fileinfo.stream);
+	input_loop(&settings, &fileinfo);
 	return (EXIT_SUCCESS);
 }

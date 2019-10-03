@@ -1,22 +1,31 @@
-/*
-*/
-
 #include "KVPstorage.h"
 #include <stdlib.h>
 #include <string.h>
 
-void	update_file(FILE **file_info, t_kvp *settings)
+/*
+Each time anything changes in settings list all settings are written to file
+*/
+
+void	update_file(t_fileinfo *fileinfo, t_kvp *settings)
 {
-	*file_info = freopen(NULL, "w", *file_info);
-	if (*file_info == NULL)
+	fileinfo->stream = freopen(fileinfo->filepath, "r+", fileinfo->stream);
+	if (fileinfo->stream == NULL)
 	{
 		perror("Error re-opening settings file");
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
-	while (settings)
+	while (settings != NULL)
 	{
-		fwrite(settings->key, sizeof(char), KEYSIZE, *file_info);
-		fwrite(settings->value, sizeof(char), VALUESIZE, *file_info);
+		if (fwrite(settings->key, sizeof(char), KEYSIZE, fileinfo->stream) != KEYSIZE)
+		{
+			perror("Error writing to settings file");
+			exit(EXIT_FAILURE);
+		}
+		if (fwrite(settings->value, sizeof(char), VALUESIZE, fileinfo->stream) != VALUESIZE)
+		{
+			perror("Error writing to settings file");
+			exit(EXIT_FAILURE);
+		}
 		settings = settings->next;
 	}
 }
