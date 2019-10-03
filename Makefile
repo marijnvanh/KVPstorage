@@ -1,8 +1,9 @@
 NAME	= KVPstorage
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
-SRCS	= main input_loop exec_command open_settings_file init_settings_list add_kvp_to_list lst_new_setting \
-		lst_add_setting cmd_set get_kvp_from_line get_kvp_from_list cmd_get cmd_delete update_file cmd_getall
+SRCS	= main input_loop exec_command open_settings_file init_settings_list \
+		add_kvp_to_list lst_new_setting lst_add_setting cmd_set get_kvp_from_line \
+		get_kvp_from_list cmd_get cmd_delete update_file cmd_getall
 VPATH	= ./srcs
 
 OBJECTS := $(SRCS:%=%.o)

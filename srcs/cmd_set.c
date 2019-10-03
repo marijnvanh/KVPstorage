@@ -4,13 +4,13 @@
 #include <string.h>
 
 /*
-Update settings first checks if there is a matching setting in settings list
+set_new_setting first checks if there is a matching setting in settings list
 If there is a match the value is updated 
 Otherwise, a new settings node is added to the settings list
 Update_file updates the file on disk
 */
 
-static void	update_settings(t_kvp **settings, t_fileinfo *fileinfo,
+static void	set_new_setting(t_kvp **settings, t_fileinfo *fileinfo,
 			char key[KEYSIZE + 1], char value[VALUESIZE + 1])
 {
 	t_kvp *key_match;
@@ -55,5 +55,5 @@ void		cmd_set(t_kvp **settings, t_fileinfo *fileinfo, char *line)
 		value_index++;
 	if (line[value_index] != '\0' && get_value_from_line(&line[value_index], value) == -1)
 		return ;
-	update_settings(settings, fileinfo, key, value);
+	set_new_setting(settings, fileinfo, key, value);
 }
