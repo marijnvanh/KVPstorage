@@ -4,16 +4,15 @@
 #include "KVPstorage.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-t_kvp	*init_settings_list(char *filepath)
+t_kvp	*init_settings_list(FILE *file_info)
 {
 	t_kvp	*settings;
-	FILE	*file_info;
 	char	kvp[KEYSIZE + VALUESIZE];
 	size_t	ret;
 
 	settings = NULL;
-	file_info = open_settings_file(filepath);
 	ret = 1;
 	while (ret > 0)
 	{
@@ -27,6 +26,5 @@ t_kvp	*init_settings_list(char *filepath)
 		}
 		add_kvp_to_list(&settings, kvp);
 	}
-	fclose(file_info);
 	return (settings);
 }

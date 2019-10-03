@@ -8,17 +8,12 @@
 
 void	add_kvp_to_list(t_kvp **settings, char *kvp)
 {
-	char	*key;
-	char	*value;
+	char	key[KEYSIZE + 1];
+	char	value[VALUESIZE + 1];
 
-	(void)settings;
-	key = strndup(kvp, KEYSIZE); // moet dit strdup of kan dit met memcpy
-	value = strndup(&kvp[KEYSIZE], VALUESIZE);
-	if (key == NULL || value == NULL)
-	{
-		perror("Could not allocate enough memmory\n");
-		exit(EXIT_FAILURE);
-	}
-	printf("key: %s value: %s\n", key, value);
+	memcpy(key, kvp, KEYSIZE);
+	key[KEYSIZE] = 0;
+	memcpy(value, &kvp[KEYSIZE], VALUESIZE);
+	value[VALUESIZE] = 0;
 	lst_add_setting(settings, lst_new_setting(key, value));
 }

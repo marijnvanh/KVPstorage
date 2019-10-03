@@ -7,23 +7,21 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
-void	exec_command(char *line)
+void	exec_command(t_kvp **settings, FILE *file_info, char *line)
 {
-	if (strncmp(line, "SET ", 4) == 0)
-	{
-		printf("SET");
-	}
-	else if (strncmp(line, "GET ", 4) == 0)
+	if (strncmp(line, "SET", 3) == 0 && isblank(line[3]) != 0)
+		cmd_set(settings, file_info, line);
+	else if (strncmp(line, "GET", 3) == 0 && isblank(line[3]) != 0)
 	{
 		printf("GET");
-		;
 	}
-	else if (strncmp(line, "DELETE ", 7) == 0)
+	else if (strncmp(line, "DELETE", 6) == 0 && isblank(line[3]) != 0)
 	{
 		printf("DELTE");
 	}
-	else if (strncmp(line, "exit", 4) == 0)
+	else if (strncmp(line, "exit", 4) == 0 && line[4] == '\0')
 	{
 		exit(EXIT_SUCCESS);
 	}

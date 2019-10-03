@@ -29,11 +29,13 @@ int			main(int argc, char **argv)
 {
 	t_kvp	*settings;
 	char	*filepath;
+	FILE	*file_info;
 
 	(void)argc;
 	settings = NULL;
 	filepath = init_filepath(argv[1]);
-	settings = init_settings_list(filepath);
-	input_loop(&settings, filepath);
+	file_info = open_settings_file(filepath);
+	settings = init_settings_list(file_info);
+	input_loop(&settings, file_info);
 	return (EXIT_SUCCESS);
 }
