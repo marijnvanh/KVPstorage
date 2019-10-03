@@ -2,7 +2,7 @@
 # define KVPSTORAGE_H
 
 # define INVALID	"Invalid input.\n"
-# define USAGE		"Usage: KVPstorage: \nSET\t<KEY> [VALUE]\nGET\t<KEY>\nDELETE\t<KEY>\nexit\n"
+# define USAGE		"Usage: KVPstorage: \nSET\t<KEY> [VALUE]\nGET\t<KEY>\nDELETE\t<KEY>\nGETALL\nexit\n"
 # define KEYSIZE	4
 # define VALUESIZE	6
 # define DFLT_FILE	".settings"

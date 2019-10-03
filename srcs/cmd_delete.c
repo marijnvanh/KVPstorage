@@ -1,11 +1,12 @@
-/*
-	could implement deleting multipe entries
-*/
-
 #include "KVPstorage.h"
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+
+/*
+del_kvp will go through the settings lst to find a match with key
+If it finds a match it deletes the node, otherwise it does nothing
+*/
 
 static void	del_kvp_from_list(t_kvp **settings, char *key)
 {
@@ -34,6 +35,13 @@ static void	del_kvp_from_list(t_kvp **settings, char *key)
 	}
 }
 
+/*
+cmd_delete first tries to find a key and will return if no keys are found
+It will then try to delete the setting matching the key
+Any input after the key is ignored
+It always returns OK even if the setting is not found
+*/
+
 void		cmd_delete(t_kvp **settings, t_fileinfo *fileinfo, char *line)
 {
 	char	key[KEYSIZE + 1];
@@ -51,4 +59,5 @@ void		cmd_delete(t_kvp **settings, t_fileinfo *fileinfo, char *line)
 		return ;
 	del_kvp_from_list(settings, key);
 	update_file(fileinfo, *settings);
+	printf("OK\n");
 }

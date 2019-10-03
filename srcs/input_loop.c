@@ -29,9 +29,13 @@ void	input_loop(t_kvp **settings, t_fileinfo *fileinfo)
 			exit (EXIT_FAILURE) ;
 		}
 		if (ret < 2)
+		{
+			free(line);
 			continue ;
+		}
 		else
 			line[ret - 1] = '\0';
 		exec_command(settings, fileinfo, line);
+		free(line);
 	}
 }

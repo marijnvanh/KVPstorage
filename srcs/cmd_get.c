@@ -1,12 +1,14 @@
-/*
-	it ignores more values, could implement gettting multipe keys / values
-*/
-
 #include "KVPstorage.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+
+/*
+Cmd_get first retrieves the key from line
+It then tries the find the key in settings list
+It will print the value if it's found, else it will print error
+*/
 
 void	cmd_get(t_kvp *settings, char *line)
 {

@@ -1,9 +1,9 @@
-/*
-	it ignores more values, could implement gettting multipe keys / values
-*/
-
 #include "KVPstorage.h"
 #include <stdio.h>
+
+/*
+cmd_getall shows all settings currently in settings list
+*/
 
 void	cmd_getall(t_kvp *settings)
 {

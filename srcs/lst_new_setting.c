@@ -1,9 +1,11 @@
-/*
-*/
-
 #include "KVPstorage.h"
 #include <stdlib.h>
 #include <string.h>
+
+/*
+A new kvp list item is created with key and value
+When the malloc fails the progrom exits
+*/
 
 t_kvp	*lst_new_setting(char key[KEYSIZE + 1], char value[VALUESIZE + 1])
 {
@@ -13,7 +15,7 @@ t_kvp	*lst_new_setting(char key[KEYSIZE + 1], char value[VALUESIZE + 1])
 	if (new_setting == NULL)
 	{
 		perror("Could not allocate enough memmory\n");
-		exit(EXIT_FAILURE); // maybe don't exit here
+		exit(EXIT_FAILURE);
 	}
 	memcpy(new_setting->key, key, KEYSIZE + 1);
 	memcpy(new_setting->value, value, VALUESIZE + 1);

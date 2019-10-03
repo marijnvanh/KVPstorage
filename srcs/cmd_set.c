@@ -21,6 +21,7 @@ static void	update_settings(t_kvp **settings, t_fileinfo *fileinfo,
 	else
 		lst_add_setting(settings, lst_new_setting(key, value));
 	update_file(fileinfo, *settings);
+	printf("OK\n");
 }
 
 /*
