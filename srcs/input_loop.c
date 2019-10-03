@@ -29,6 +29,5 @@ void	input_loop(t_kvp **settings, FILE *file_info)
 		else
 			line[ret - 1] = '\0';
 		exec_command(settings, file_info, line);
-		putchar('\n');
 	}
 }

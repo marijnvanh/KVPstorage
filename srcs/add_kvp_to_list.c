@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void	add_kvp_to_list(t_kvp **settings, char *kvp)
+void	add_kvp_to_list(t_kvp **settings, char kvp[KEYSIZE + VALUESIZE])
 {
 	char	key[KEYSIZE + 1];
 	char	value[VALUESIZE + 1];

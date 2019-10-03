@@ -3,70 +3,46 @@
 */
 
 #include "KVPstorage.h"
-// #include <stdio.h>
-// #include <errno.h>
-#include <string.h>
-#include <stdlib.h>
+#include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
-ssize_t	get_key_from_line(char *line, char *key)
+static void	update_settings(t_kvp **settings, FILE *file_info,
+			char key[KEYSIZE + 1], char value[VALUESIZE + 1])
 {
-	ssize_t i;
-	size_t	j;
+	t_kvp *key_match;
 
-	i = 0;
-	while (isblank(line[i]) != 0)
-		i++;
-	if (line[i] == '\0')
-		return (-1); // error
-	j = 0;
-	while (isblank(line[i]) == 0 && line[i] != '\0' && j < KEYSIZE)
-	{
-		key[j] = line[i];
-		j++;
-		i++;
-	}
-	if (j == KEYSIZE)
-		return (-1); // error
-	return (i);
+	key_match = get_kvp_from_list(*settings, key);
+	if (key_match != NULL)
+		memcpy(key_match->value, value, VALUESIZE + 1);
+	else
+		lst_add_setting(settings, lst_new_setting(key, value));
+	(void)file_info; // add to file function;
 }
 
-ssize_t	get_value_from_line(char *line, char *value)
-{
-	ssize_t i;
-	size_t	j;
-
-	i = 0;
-	while (isblank(line[i]) != 0)
-		i++;
-	if (line[i] == '\0')
-		return (-1); // error
-	j = 0;
-	while (line[i] != '\0' && j < VALUESIZE)
-	{
-		value[j] = line[i];
-		j++;
-		i++;
-	}
-	if (j == VALUESIZE)
-		return (-1); // error
-	return (i);
-}
-
-void	cmd_set(t_kvp **settings, FILE *file_info, char *line)
+void		cmd_set(t_kvp **settings, FILE *file_info, char *line)
 {
 	char	key[KEYSIZE + 1];
 	char	value[VALUESIZE + 1];
 	ssize_t	value_index;
+	ssize_t	key_index = 4;
 
 	bzero(key, KEYSIZE + 1);
 	bzero(value, VALUESIZE + 1);
-	value_index = get_key_from_line(&line[4], key);
+	while (isblank(line[key_index]) != 0)
+		key_index++;
+	if (line[key_index] == '\0')
+	{
+		fprintf(stderr, INVALID USAGE);
+		return ;
+	}
+	value_index = get_key_from_line(&line[key_index], key);
 	if (value_index == -1)
 		return ;
-	if (get_value_from_line(&line[value_index + 4], value) == -1)
+	value_index += 4;
+	while (isblank(line[value_index]) != 0)
+		value_index++;
+	if (line[value_index] != '\0' && get_value_from_line(&line[value_index], value) == -1)
 		return ;
-	printf("key: %s value: %s\n", key, value);
-	lst_add_setting(settings, lst_new_setting(key, value));
-	(void)file_info; // add to file function;
+	update_settings(settings, file_info, key, value);
 }
