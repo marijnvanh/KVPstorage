@@ -17,8 +17,8 @@ typedef struct	s_kvp
 }				t_kvp;
 
 void	read_loop(void);
-void	exec_command(t_kvp **settings, FILE *file_info, char *line);
-void	input_loop(t_kvp **settings, FILE *file_info);
+void	exec_command(t_kvp **settings, FILE **file_info, char *line);
+void	input_loop(t_kvp **settings, FILE **file_info);
 FILE	*open_settings_file(char *filepath);
 t_kvp	*init_settings_list(FILE *file_info);
 void	add_kvp_to_list(t_kvp **settings, char kvp[KEYSIZE + VALUESIZE]);
@@ -28,9 +28,11 @@ void	add_kvp_to_list(t_kvp **settings, char *kvp);
 ssize_t	get_value_from_line(char *line, char value[VALUESIZE + 1]);
 ssize_t	get_key_from_line(char *line, char key[KEYSIZE + 1]);
 t_kvp	*get_kvp_from_list(t_kvp *settings, char *key);
+void	update_file(FILE **file_info, t_kvp *settings);
+void	cmd_getall(t_kvp *settings);
 
-void	cmd_set(t_kvp **settings, FILE *file_info, char *line);
+void	cmd_set(t_kvp **settings, FILE **file_info, char *line);
 void	cmd_get(t_kvp *settings, char *line);
-void	cmd_delete(t_kvp **settings, FILE *file_info, char *line);
+void	cmd_delete(t_kvp **settings, FILE **file_info, char *line);
 
 #endif

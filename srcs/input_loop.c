@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-void	input_loop(t_kvp **settings, FILE *file_info)
+void	input_loop(t_kvp **settings, FILE **file_info)
 {
 	char	*line;
 	size_t	linecap;

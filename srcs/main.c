@@ -36,6 +36,6 @@ int			main(int argc, char **argv)
 	filepath = init_filepath(argv[1]);
 	file_info = open_settings_file(filepath);
 	settings = init_settings_list(file_info);
-	input_loop(&settings, file_info);
+	input_loop(&settings, &file_info);
 	return (EXIT_SUCCESS);
 }

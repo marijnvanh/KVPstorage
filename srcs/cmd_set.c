@@ -7,7 +7,7 @@
 #include <ctype.h>
 #include <string.h>
 
-static void	update_settings(t_kvp **settings, FILE *file_info,
+static void	update_settings(t_kvp **settings, FILE **file_info,
 			char key[KEYSIZE + 1], char value[VALUESIZE + 1])
 {
 	t_kvp *key_match;
@@ -17,10 +17,10 @@ static void	update_settings(t_kvp **settings, FILE *file_info,
 		memcpy(key_match->value, value, VALUESIZE + 1);
 	else
 		lst_add_setting(settings, lst_new_setting(key, value));
-	(void)file_info; // add to file function;
+	update_file(file_info, *settings);
 }
 
-void		cmd_set(t_kvp **settings, FILE *file_info, char *line)
+void		cmd_set(t_kvp **settings, FILE **file_info, char *line)
 {
 	char	key[KEYSIZE + 1];
 	char	value[VALUESIZE + 1];
@@ -39,7 +39,7 @@ void		cmd_set(t_kvp **settings, FILE *file_info, char *line)
 	value_index = get_key_from_line(&line[key_index], key);
 	if (value_index == -1)
 		return ;
-	value_index += 4;
+	value_index += key_index;
 	while (isblank(line[value_index]) != 0)
 		value_index++;
 	if (line[value_index] != '\0' && get_value_from_line(&line[value_index], value) == -1)

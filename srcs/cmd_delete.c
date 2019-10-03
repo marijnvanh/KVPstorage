@@ -34,7 +34,7 @@ static void	del_kvp_from_list(t_kvp **settings, char *key)
 	}
 }
 
-void		cmd_delete(t_kvp **settings, FILE *file_info, char *line)
+void		cmd_delete(t_kvp **settings, FILE **file_info, char *line)
 {
 	char	key[KEYSIZE + 1];
 	ssize_t	key_index = 7;
@@ -50,6 +50,5 @@ void		cmd_delete(t_kvp **settings, FILE *file_info, char *line)
 	if (get_key_from_line(&line[key_index], key) == -1)
 		return ;
 	del_kvp_from_list(settings, key);
-	(void)file_info;
-	// update list
+	update_file(file_info, *settings);
 }
