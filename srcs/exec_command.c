@@ -13,11 +13,11 @@ If no cmd is found it prints the USAGE of KVKstorage
 void	exec_command(t_kvp **settings, t_fileinfo *fileinfo, char *line)
 {
 	if (strncmp(line, "SET", 3) == 0 && isblank(line[3]) != 0)
-		cmd_set(settings, fileinfo, line);
+		cmd_set(settings, fileinfo, line + 4);
 	else if (strncmp(line, "GET", 3) == 0 && isblank(line[3]) != 0)
-		cmd_get(*settings, line);
+		cmd_get(*settings, line + 4);
 	else if (strncmp(line, "DELETE", 6) == 0 && isblank(line[6]) != 0)
-		cmd_delete(settings, fileinfo, line);
+		cmd_delete(settings, fileinfo, line + 7);
 	else if (strncmp(line, "GETALL", 6) == 0 && line[6] == '\0')
 		cmd_getall(*settings);
 	else if (strncmp(line, "exit", 4) == 0 && line[4] == '\0')

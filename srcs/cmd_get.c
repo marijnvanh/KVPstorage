@@ -13,9 +13,10 @@ It will print the value if it's found, else it will print error
 void	cmd_get(t_kvp *settings, char *line)
 {
 	char	key[KEYSIZE + 1];
-	ssize_t	key_index = 4;
+	size_t	key_index;
 	t_kvp	*setting;
 
+	key_index = 0;
 	bzero(key, KEYSIZE + 1);
 	while (isblank(line[key_index]) != 0)
 		key_index++;

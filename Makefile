@@ -1,6 +1,7 @@
 NAME	= KVPstorage
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
+HEADER	= KVPstorage.h
 SRCS	= main input_loop exec_command open_settings_file init_settings_list \
 		add_kvp_to_list lst_new_setting lst_add_setting cmd_set get_kvp_from_line \
 		get_kvp_from_list cmd_get cmd_delete update_file cmd_getall
@@ -9,13 +10,17 @@ VPATH	= ./srcs
 OBJECTS := $(SRCS:%=%.o)
 SRCS	:= $(SRCS:%=%.c)
 
+ifeq ($(static), true)
+FLAGS += -static
+endif
+
 all: $(OBJECTS) $(NAME)
 
 $(NAME): $(OBJECTS)
 	@$(CC) $(FLAGS) $^ -o $(NAME)
 	@echo "[ + ] $(NAME) has been compiled"
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	@$(CC) $(FLAGS) -c -o $@ $< -I .
 
 clean:

@@ -4,7 +4,7 @@
 
 /*
 A new kvp list item is created with key and value
-When the malloc fails the progrom exits
+When malloc fails the program exits
 */
 
 t_kvp	*lst_new_setting(char key[KEYSIZE + 1], char value[VALUESIZE + 1])

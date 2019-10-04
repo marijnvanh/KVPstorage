@@ -45,8 +45,9 @@ It always returns OK even if the setting is not found
 void		cmd_delete(t_kvp **settings, t_fileinfo *fileinfo, char *line)
 {
 	char	key[KEYSIZE + 1];
-	ssize_t	key_index = 7;
+	size_t	key_index;
 
+	key_index = 0;
 	bzero(key, KEYSIZE + 1);
 	while (isblank(line[key_index]) != 0)
 		key_index++;
