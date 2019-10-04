@@ -19,15 +19,15 @@ Keys cannot contain blank spaces but values can. Values can also be empty.
 
 Commands:
 
-SET		KEY [VALUE]
+SET		\<KEY> [VALUE]
 
 - SET command requires a key and optionally a value.
 
-GET		KEY
+GET		\<KEY>
 
 - GET command requires a key. Any other input after the first key is ignored.
 
-DELETE	KEY
+DELETE	\<KEY>
 
 - DELETE command requires a key. Any other input after the first key is ignored.
 
