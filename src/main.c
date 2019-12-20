@@ -6,7 +6,7 @@
 Filepath gets set, either with a path given as argument or the default file
 */
 
-static char	*init_filepath(char *argv_1)
+char		*init_filepath(char *argv_1)
 {
 	char *filepath;
 

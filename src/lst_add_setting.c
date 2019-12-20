@@ -6,13 +6,13 @@
 Adds new kvp to the beginning of the settings list
 */
 
-void	lst_add_setting(t_kvp **settings, t_kvp *new)
+void	lst_add_setting(t_kvp **settings, t_kvp *neww)
 {
 	if (*settings == NULL)
-		*settings = new;
+		*settings = neww;
 	else
 	{
-		new->next = *settings;
-		*settings = new;
+		neww->next = *settings;
+		*settings = neww;
 	}
 }

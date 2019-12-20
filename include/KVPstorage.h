@@ -32,7 +32,7 @@ ssize_t			get_key_from_line(char *line, char key[KEYSIZE + 1]);
 ssize_t			get_value_from_line(char *line, char value[VALUESIZE + 1]);
 
 t_kvp			*lst_new_setting(char key[KEYSIZE + 1], char value[VALUESIZE + 1]);
-void			lst_add_setting(t_kvp **settings, t_kvp *new);
+void			lst_add_setting(t_kvp **settings, t_kvp *neww);
 t_kvp			*get_kvp_from_list(t_kvp *settings, char *key);
 
 void			update_file(t_fileinfo *fileinfo, t_kvp *settings);
@@ -41,5 +41,7 @@ void			cmd_set(t_kvp **settings, t_fileinfo *fileinfo, char *line);
 void			cmd_get(t_kvp *settings, char *line);
 void			cmd_delete(t_kvp **settings, t_fileinfo *fileinfo, char *line);
 void			cmd_getall(t_kvp *settings);
+
+char			*init_filepath(char *argv_1);
 
 #endif
